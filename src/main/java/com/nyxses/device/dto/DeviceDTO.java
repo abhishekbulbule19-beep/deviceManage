@@ -1,24 +1,16 @@
-package com.deviceManage.deviceManage.entity;
+package com.nyxses.device.dto;
 
-
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Table(name = "devices")
+@NoArgsConstructor
 
-public class Device {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DeviceDTO {
     private  Long id;
     private Long number;
     private String description;
@@ -36,8 +28,6 @@ public class Device {
     private String oldnumber;
     private String fastsearch;
     private LocalDateTime enrolltime;
-    @Column(columnDefinition = "TEXT")
     private String infojson;
     private String publicip;
-
 }

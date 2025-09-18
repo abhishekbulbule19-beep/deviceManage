@@ -1,6 +1,6 @@
-package com.deviceManage.deviceManage.repository;
+package com.nyxses.device.repository;
 
-import com.deviceManage.deviceManage.entity.Device;
+import com.nyxses.device.entity.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.deviceManage.deviceManage.exception;
+package com.nyxses.device.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

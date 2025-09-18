@@ -1,14 +1,17 @@
-package com.deviceManage.deviceManage.service;
+package com.nyxses.device.service;
 
-import com.deviceManage.deviceManage.dto.DeviceDTO;
-import com.deviceManage.deviceManage.entity.Device;
-import com.deviceManage.deviceManage.repository.DeviceRepository;
+import com.nyxses.device.dto.DeviceDTO;
+import com.nyxses.device.entity.Device;
+import com.nyxses.device.mapper.DeviceMapper;
+import com.nyxses.device.repository.DeviceRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
@@ -26,12 +29,15 @@ class DeviceServiceTest {
     @Mock
     private DeviceRepository deviceRepository;
 
+//    use real MapStruct implementation
+    @Spy
+    private DeviceMapper deviceMapper = Mappers.getMapper(DeviceMapper.class);
+
     @InjectMocks
     private DeviceService deviceService;
 
-    private Device device;
-    private DeviceDTO deviceDTO;
-
+        private Device device;
+        private DeviceDTO deviceDTO;
 
     @BeforeEach
     void setUp() {
@@ -55,27 +61,28 @@ class DeviceServiceTest {
         device.setEnrolltime(LocalDateTime.parse("2025-09-12T10:32:00"));
         device.setInfojson("{\"osVersion\":\"14\",\"model\":\"Pixel 8\"}");
         device.setPublicip("203.0.113.32");
+        System.out.println(device);
 
         deviceDTO = new DeviceDTO();
-        deviceDTO.setId(1L);
-        deviceDTO.setNumber(1003L);
-        deviceDTO.setDescription("Test Device for QA 3 updated descriptions");
-        deviceDTO.setLastupdate(LocalDateTime.parse("2025-09-12T10:30:00"));
-        deviceDTO.setConfigurationid(5L);
-        deviceDTO.setOldconfigurationid(0L);
-        deviceDTO.setInfo("Test deviceDTO registered for API validation");
-        deviceDTO.setImei("3598761234567567");
-        deviceDTO.setPhone("+918660460008");
-        deviceDTO.setCustomerid(103L);
-        deviceDTO.setImeiupdates("2025-09-12T10:30:00");
-        deviceDTO.setCustom1("Location: QA Lab America");
-        deviceDTO.setCustom2("OS: Android 10");
-        deviceDTO.setCustom3("Batch: TestRun_010 updated");
-        deviceDTO.setOldnumber("1002");
-        deviceDTO.setFastsearch("TESTDEVICE03");
-        deviceDTO.setEnrolltime(LocalDateTime.parse("2025-09-12T10:32:00"));
-        deviceDTO.setInfojson("{\"osVersion\":\"14\",\"model\":\"Pixel 8\"}");
-        deviceDTO.setPublicip("203.0.113.32");
+        deviceDTO.setId(device.getId());
+        deviceDTO.setNumber(device.getNumber());  // <-- now you can access this
+        deviceDTO.setDescription(device.getDescription());
+        deviceDTO.setLastupdate(device.getLastupdate());
+        deviceDTO.setConfigurationid(device.getConfigurationid());
+        deviceDTO.setOldconfigurationid(device.getOldconfigurationid());
+        deviceDTO.setInfo(device.getInfo());
+        deviceDTO.setImei(device.getImei());
+        deviceDTO.setPhone(device.getPhone());
+        deviceDTO.setCustomerid(device.getCustomerid());
+        deviceDTO.setImeiupdates(device.getImeiupdates());
+        deviceDTO.setCustom1(device.getCustom1());
+        deviceDTO.setCustom2(device.getCustom2());
+        deviceDTO.setCustom3(device.getCustom3());
+        deviceDTO.setOldnumber(device.getOldnumber());
+        deviceDTO.setFastsearch(device.getFastsearch());
+        deviceDTO.setEnrolltime(device.getEnrolltime());
+        deviceDTO.setInfojson(device.getInfojson());
+        deviceDTO.setPublicip(device.getPublicip());
 
     }
 
@@ -86,19 +93,25 @@ class DeviceServiceTest {
 
     @Test
     void createDevice() {
+        System.out.println("device entity " + device);
         when(deviceRepository.save(any(Device.class))).thenReturn(device);
         DeviceDTO savedDevice = deviceService.createDevice(deviceDTO);
+        System.out.println("creted data "+savedDevice);
+        System.out.println("DTO data "+deviceDTO);
         assertNotNull(savedDevice);
-        assertEquals(deviceDTO.getPhone(), savedDevice.getPhone());
+        assertEquals(deviceDTO.getNumber(), savedDevice.getNumber());
+        verify(deviceRepository, times(1)).save(any(Device.class));
     }
 
     @Test
-    void getAllDevices() {
+    void getAllDevices_returnsDummyData() {
         when(deviceRepository.findAll()).thenReturn(Collections.singletonList(device));
         var allDevices = deviceService.getAllDevices();
-        assertNotNull(allDevices);
-        assertEquals(1,allDevices.size());
-        assertEquals(device.getPhone(),allDevices.get(0).getPhone());
+        System.out.println("get all device "+ allDevices);
+        assertNotNull(allDevices,"Device Should not be null");
+        assertEquals(1,allDevices.size(),"Device list size should be 1");
+        assertEquals(device.getNumber(),allDevices.get(0).getNumber(),"Number should match");
+
         verify(deviceRepository, times(1)).findAll(); // verifies that findAll() was called once on mock
 
     }
@@ -108,7 +121,7 @@ class DeviceServiceTest {
         when(deviceRepository.findById(1L)).thenReturn(Optional.of(device));
         DeviceDTO fondDevice = deviceService.getDeviceById(1L);
         assertNotNull(fondDevice);
-        assertEquals(device.getPhone(), fondDevice.getPhone());
+        assertEquals(device.getNumber(), fondDevice.getNumber());
         verify(deviceRepository, times(1)).findById(1L);
 
     }
@@ -121,7 +134,7 @@ class DeviceServiceTest {
         DeviceDTO updateDevice = deviceService.updateDevice(1L,deviceDTO);
 
         assertNotNull(updateDevice);
-        assertEquals(device.getPhone(),updateDevice.getPhone());
+        assertEquals(device.getNumber(),updateDevice.getNumber());
         verify(deviceRepository, times(1)).findById(1L);
         verify(deviceRepository,times(1)).save(any(Device.class));
     }

@@ -1,4 +1,4 @@
-package com.deviceManage.deviceManage.exception;
+package com.nyxses.device.exception;
 
 public class DeviceNotFoundException extends RuntimeException{
     public DeviceNotFoundException(String message){

@@ -1,6 +1,6 @@
-package com.deviceManage.deviceManage.repository;
+package com.nyxses.device.repository;
 
-import com.deviceManage.deviceManage.entity.Device;
+import com.nyxses.device.entity.Device;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,10 @@
-package com.deviceManage.deviceManage.controller;
+package com.nyxses.device.controller;
 
-import com.deviceManage.deviceManage.dto.DeviceDTO;
-import com.deviceManage.deviceManage.service.DeviceService;
+import com.nyxses.device.dto.DeviceDTO;
+import com.nyxses.device.service.DeviceService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +23,10 @@ public class DeviceController {
 
     //    create devices
     @PostMapping
-    public DeviceDTO createDevice(@RequestBody DeviceDTO deviceDTO){
-        return deviceService.createDevice(deviceDTO);
+
+    public ResponseEntity<DeviceDTO> createDevice(@RequestBody DeviceDTO deviceDTO){
+        DeviceDTO createdDevice = deviceService.createDevice(deviceDTO);
+        return new ResponseEntity<>(createdDevice, HttpStatus.CREATED);
     }
 
 //    get single device
