@@ -10,10 +10,14 @@ import org.mapstruct.MappingTarget;
 public interface DeviceMapper {
     DeviceDTO toDeviceDTO(Device device);
 
-    Device toDeviceEntity(DeviceDTO deviceDTO);
-
     @Mapping(target = "id", ignore = true)
     void updateDeviceFromDto(DeviceDTO dto, @MappingTarget Device entity);
+
+    Device toDeviceEntity(DeviceDTO deviceDTO);
+
+
+
+
 
 
 }
