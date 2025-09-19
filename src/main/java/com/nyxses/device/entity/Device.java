@@ -18,14 +18,6 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Column(name="number", nullable = false)
     private Long number;
     @Column(name="description", nullable = false)
@@ -33,9 +25,9 @@ public class Device {
     @Column(name="lastupdate", nullable = true)
     private LocalDateTime lastupdate;
     @Column(name="configurationid", nullable = false)
-    private Long configurationid;
+    private Long configurationId;
     @Column(name="oldconfigurationid", nullable = false)
-    private Long oldconfigurationid;
+    private Long oldConfigurationId;
     @Column(name="info", nullable = false)
     private String info;
     @Column(name="imei", nullable = false)
@@ -43,7 +35,7 @@ public class Device {
     @Column(name="phone", nullable = false)
     private String phone;
     @Column(name="customerid", nullable = false)
-    private Long customerid;
+    private Long customerId;
     @Column(name="imeiupdates", nullable = false)
     private String imeiupdates;
     @Column(name="custom1", nullable = true)

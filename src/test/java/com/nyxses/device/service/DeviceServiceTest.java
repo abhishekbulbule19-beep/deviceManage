@@ -46,12 +46,12 @@ class DeviceServiceTest {
         device.setNumber(1003L);
         device.setDescription("Test Device for QA 3 updated descriptions");
         device.setLastupdate(LocalDateTime.parse("2025-09-12T10:30:00"));
-        device.setConfigurationid(5L);
-        device.setOldconfigurationid(0L);
+        device.setConfigurationId(5L);
+        device.setOldConfigurationId(0L);
         device.setInfo("Test device registered for API validation");
         device.setImei("3598761234567567");
         device.setPhone("+918660460008");
-        device.setCustomerid(103L);
+        device.setCustomerId(103L);
         device.setImeiupdates("2025-09-12T10:30:00");
         device.setCustom1("Location: QA Lab America");
         device.setCustom2("OS: Android 10");
@@ -68,12 +68,12 @@ class DeviceServiceTest {
         deviceDTO.setNumber(device.getNumber());  // <-- now you can access this
         deviceDTO.setDescription(device.getDescription());
         deviceDTO.setLastupdate(device.getLastupdate());
-        deviceDTO.setConfigurationid(device.getConfigurationid());
-        deviceDTO.setOldconfigurationid(device.getOldconfigurationid());
+        deviceDTO.setConfigurationId(device.getConfigurationId());
+        deviceDTO.setOldConfigurationId(device.getOldConfigurationId());
         deviceDTO.setInfo(device.getInfo());
         deviceDTO.setImei(device.getImei());
         deviceDTO.setPhone(device.getPhone());
-        deviceDTO.setCustomerid(device.getCustomerid());
+        deviceDTO.setCustomerId(device.getCustomerId());
         deviceDTO.setImeiupdates(device.getImeiupdates());
         deviceDTO.setCustom1(device.getCustom1());
         deviceDTO.setCustom2(device.getCustom2());

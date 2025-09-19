@@ -30,11 +30,11 @@ public class DeviceDTO {
     @JsonProperty("lastupdate")
     private LocalDateTime lastupdate;
     @Schema(example = "3")
-    @JsonProperty("configurationid")
-    private Long configurationid;
+    @JsonProperty("configurationId")
+    private Long configurationId;
     @Schema(example = "0")
-    @JsonProperty("oldconfigurationid")
-    private Long oldconfigurationid;
+    @JsonProperty("oldConfigurationId")
+    private Long oldConfigurationId;
     @Schema(example = "Test device registered for API validation")
     @JsonProperty("info")
     private String info;
@@ -45,8 +45,8 @@ public class DeviceDTO {
     @JsonProperty("phone")
     private String phone;
     @Schema(example = "107")
-    @JsonProperty("customerid")
-    private Long customerid;
+    @JsonProperty("customerId")
+    private Long customerId;
     @Schema(example = "2025-09-12T10:30:00")
     @JsonProperty("imeiupdates")
     private String imeiupdates;
